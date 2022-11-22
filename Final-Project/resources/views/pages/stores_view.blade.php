@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="author">
-                            <img src="{{ $store->store_logo }}" style="border-radius: 50%; max-width: 170px;">
+                            <img src="{{$store->store_logo}}" style="border-radius: 50%; max-width: 170px;">
                             <h4>{{ $store->store_name }}
                                 <br>
                                 <p style="color: darkmagenta;"> {{ $store->store_address }} </p>
