@@ -34,8 +34,6 @@
     </div>
     <div class="author-page">
         <div class="container">
-            {{-- ----------------------- --}}
-
             @foreach ($stores_data as $store)
                 <div class="row">
                     <div class="col-lg-6">
@@ -65,8 +63,6 @@
                     </div>
                 </div>
             @endforeach
-
-            {{-- ----------------------- --}}
         </div>
     </div>
 @endsection
