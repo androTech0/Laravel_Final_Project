@@ -23,7 +23,6 @@ Route::post('/submit-account', 'App\Http\Controllers\AdminController@signupPost'
 Route::post('/login-account', 'App\Http\Controllers\AdminController@loginPost');
 // Route::post('/edit-account/{id}', 'App\Http\Controllers\AdminController@editAccount');
 
-
 // Store Routes
 Route::get('/show-stores','App\Http\Controllers\StoresController@showStores');
 Route::get('/create-store','App\Http\Controllers\StoresController@createStore');
