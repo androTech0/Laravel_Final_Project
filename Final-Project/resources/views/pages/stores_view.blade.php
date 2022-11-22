@@ -22,7 +22,6 @@
                 <div class="col-lg-12">
                     <h6>Stores Management</h6>
                     <h2>View Details For Stores</h2>
-                    {{-- <span>Home > <a href="#">Author</a></span> --}}
                     <div class="buttons">
                         <div class="border-button">
                             <a href="{{ URL('/create-store') }}">Create Store</a>
