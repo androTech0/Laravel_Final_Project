@@ -17,19 +17,25 @@ class StoresController extends Controller
 
         $stores = StoreData::get();
 
-        foreach ($stores as $store) {
-            $img_link = Storage::url($store->store_logo);
-            $store->store_logo = $img_link;
-        }
+        $stores = $stores->map(function ($store) {
+            $store->store_logo = Storage::disk('local')->url($store->store_logo);
+            return $store;
+        });
+
+        // foreach ($stores as $store) {
+        //     $img_link = Storage::url($store->store_logo);
+        //     $store->store_logo = $img_link;
+        // }
 
         // dd($store->toArray());
-        return view('\pages\stores_view')->with('stores_data',$stores);
+        return view('\pages\stores_view')->with('stores_data', $stores);
     }
 
-    public function showTrashedStores (){
+    public function showTrashedStores()
+    {
         $stores = StoreData::onlyTrashed()->get();
 
-        return view('\pages\stores-trash')->with('stores_data',$stores);
+        return view('\pages\stores-trash')->with('stores_data', $stores);
     }
 
     public function createStore()
@@ -74,22 +80,22 @@ class StoresController extends Controller
             return view('\pages\login')->with('alert', 'you have login first');
         }
 
-        $storeData = StoreData::where('id',$id)
-        ->first();
+        $storeData = StoreData::where('id', $id)
+            ->first();
 
-        return view('\pages\edit_store')->with('storeData',$storeData);
+        return view('\pages\edit_store')->with('storeData', $storeData);
     }
 
-    public function updateStore(Request $request,$id)
+    public function updateStore(Request $request, $id)
     {
         if (!Session::get('login')) {
             return view('\pages\login')->with('alert', 'you have login first');
         }
 
-        $store = StoreData::where('id',$id)->first();
+        $store = StoreData::where('id', $id)->first();
 
         $image = $request->file('logo-image');
-        if($image != null){
+        if ($image != null) {
             $path = 'uploads/store-logos/';
             $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
             $fullPath = $path . $name;
@@ -118,13 +124,14 @@ class StoresController extends Controller
             return view('\pages\login')->with('alert', 'you have login first');
         }
 
-        $result = StoreData::where('id',$id)->delete();
+        $result = StoreData::where('id', $id)->delete();
 
         return redirect('/show-stores');
     }
 
-    public function restoreStore ($id){
-        $result = StoreData::onlyTrashed()->where('id',$id)->restore();
+    public function restoreStore($id)
+    {
+        $result = StoreData::onlyTrashed()->where('id', $id)->restore();
         return redirect('/show-stores');
     }
 }

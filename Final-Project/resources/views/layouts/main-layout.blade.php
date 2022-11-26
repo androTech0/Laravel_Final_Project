@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     @yield('page-title')
-    @include('\layouts\header')
+    @include('layouts\header')
     @yield('stylesheet')
   </head>
 <body>
@@ -10,7 +10,7 @@
    <!-- ***** Preloader Start ***** -->
   @include('layouts\preloader')
   <!-- ***** Preloader End ***** -->
-  
+
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
     <div class="container">
@@ -23,7 +23,7 @@
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
-                    @yield('top-menu')  
+                    @yield('top-menu')
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -39,14 +39,14 @@
   <!-- ***** Main Banner Area Start ***** -->
   @include('layouts/main-banner')
   <!-- ***** Main Banner Area End ***** -->
-  
+
   @include('layouts/categories')
 
   @include('layouts/create-banner')
 
   @include('layouts/currently-market')--}}
-  
-  @include('layouts\footer') 
+
+  @include('layouts\footer')
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   @include('layouts\scripts')
