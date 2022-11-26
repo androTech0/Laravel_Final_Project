@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     @yield('page-title')
-    @include('layouts\header')
+    @include('layouts.main-block.header')
     @yield('stylesheet')
   </head>
 <body>
 
    <!-- ***** Preloader Start ***** -->
-  @include('layouts\preloader')
+  @include('layouts.main-block.preloader')
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->
@@ -19,7 +19,7 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="{{URL('/index')}}" class="logo">
-                        <img src="assets/images/logo.png" alt="">
+                        <img src="{{asset('assets/images/logo.png')}}" alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -46,10 +46,10 @@
 
   @include('layouts/currently-market')--}}
 
-  @include('layouts\footer')
+  @include('layouts.main-block.footer')
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  @include('layouts\scripts')
+  @include('layouts.main-block.scripts')
   @yield('script')
   </body>
 </html>

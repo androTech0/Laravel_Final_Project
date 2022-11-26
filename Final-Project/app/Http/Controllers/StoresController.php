@@ -18,7 +18,7 @@ class StoresController extends Controller
         $stores = StoreData::get();
 
         $stores = $stores->map(function ($store) {
-            $store->store_logo = Storage::disk('local')->url($store->store_logo);
+            $store->store_logo = Storage::disk('public')->url($store->store_logo);
             return $store;
         });
 
@@ -57,9 +57,9 @@ class StoresController extends Controller
         $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
         $fullPath = $path . $name;
 
-        Storage::disk('local')->put($fullPath, file_get_contents($image));
+        Storage::disk('pubic')->put($fullPath, file_get_contents($image));
 
-        $status = Storage::disk('local')->exists($fullPath);
+        $status = Storage::disk('pubic')->exists($fullPath);
 
         if ($status) {
             $store = new StoreData();

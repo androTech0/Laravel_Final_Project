@@ -13,7 +13,7 @@ class AdminController extends Controller
     public function signup(){
         return view('/pages/signup');
     }
-    
+
     public function signupPost(Request $request)
     {
         Session::flush();
@@ -22,9 +22,9 @@ class AdminController extends Controller
         $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
         $fullPath = $path . $name;
 
-        Storage::disk('local')->put($fullPath, file_get_contents($image));
+        Storage::disk('public')->put($fullPath, file_get_contents($image));
 
-        $status = Storage::disk('local')->exists($fullPath);
+        $status = Storage::disk('public')->exists($fullPath);
 
         if ($status) {
             $user = new UserData();
@@ -42,7 +42,7 @@ class AdminController extends Controller
             return redirect('/signup')->with('alert','Sign Up Not Success !!');
         }
     }
-    
+
     public function login(){
         if(!Session::get('login')){
             return view('\pages\login');
@@ -59,7 +59,7 @@ class AdminController extends Controller
         $userData = UserData::where('username', $username)
         ->where('password', $password)
         ->first();
-        
+
         if($userData){
             Session::put('id',$userData->id);
             Session::put('username',$userData->username);

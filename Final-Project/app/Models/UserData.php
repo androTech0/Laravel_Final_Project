@@ -9,5 +9,5 @@ class UserData extends Model
 {
     use HasFactory;
 
-    protected $table = "usersinfo";
+    protected $table = "managers";
 }
