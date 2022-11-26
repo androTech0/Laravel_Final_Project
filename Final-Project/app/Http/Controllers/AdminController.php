@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\UserData;
+use App\Models\AdminData;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +27,7 @@ class AdminController extends Controller
         $status = Storage::disk('public')->exists($fullPath);
 
         if ($status) {
-            $user = new UserData();
+            $user = new AdminData();
             $user->username = $request['username'];
             $user->email = $request['email'];
             $user->password = $request['password'];
@@ -56,7 +56,7 @@ class AdminController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $userData = UserData::where('username', $username)
+        $userData = AdminData::where('username', $username)
         ->where('password', $password)
         ->first();
 
@@ -67,6 +67,10 @@ class AdminController extends Controller
             Session::put('email',$userData->email);
             Session::put('phone_number',$userData->phone_number);
             Session::put('visa_card',$userData->visa_card);
+
+            $img_link = Storage::disk('public')->url($userData->user_image);
+            $userData->user_image = $img_link;
+
             Session::put('user_image',$userData->user_image);
             Session::put('login',TRUE);
 

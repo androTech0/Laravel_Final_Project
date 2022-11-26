@@ -52,11 +52,33 @@
                                         <a href="{{ URL('/edit-store/' . $store->id) }}">Edit Store</a>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="main-button">
-                                        <a href="{{ URL('/delete-store/' . $store->id) }}">Delete Store</a>
+
+                                @if ($store->deleted_at)
+                                    <div class="col-6">
+                                        <div class="main-button">
+                                            <a href="{{ URL('/restore-store/' . $store->id) }}">Restore Store</a>
+                                        </div>
                                     </div>
-                                </div>
+                                    <br>
+                                    <div class="buttons">
+                                        <div class="border-button">
+                                            <a href="">Delete Store</a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="col-6">
+                                        <div class="main-button">
+                                            <a href="{{ URL('/delete-store/' . $store->id) }}">Delete Store</a>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="buttons">
+                                        <div class="main-button">
+                                            <a style="color: white;">Restore Store</a>
+                                        </div>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                     </div>

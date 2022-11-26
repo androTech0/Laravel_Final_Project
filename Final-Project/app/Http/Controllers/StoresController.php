@@ -57,9 +57,9 @@ class StoresController extends Controller
         $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
         $fullPath = $path . $name;
 
-        Storage::disk('pubic')->put($fullPath, file_get_contents($image));
+        Storage::disk('public')->put($fullPath, file_get_contents($image));
 
-        $status = Storage::disk('pubic')->exists($fullPath);
+        $status = Storage::disk('public')->exists($fullPath);
 
         if ($status) {
             $store = new StoreData();
