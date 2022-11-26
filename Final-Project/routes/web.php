@@ -29,8 +29,8 @@ Route::get('/create-store','App\Http\Controllers\StoresController@createStore');
 Route::post('/save-store','App\Http\Controllers\StoresController@saveStore');
 Route::get('/edit-store/{id}','App\Http\Controllers\StoresController@editStore');
 Route::post('/update-store/{id}','App\Http\Controllers\StoresController@updateStore');
-Route::post('/delete-store/{id}','App\Http\Controllers\StoresController@deleteStore');
-Route::post('/restore-store/{id}','App\Http\Controllers\StoresController@restoreStore');
+Route::get('/delete-store/{id}','App\Http\Controllers\StoresController@deleteStore');
+Route::get('/restore-store/{id}','App\Http\Controllers\StoresController@restoreStore');
 
 // Category Routes
 Route::get('/show-categories','App\Http\Controllers\CategoryController@showCategories');
@@ -38,8 +38,8 @@ Route::get('/create-category','App\Http\Controllers\CategoryController@createCat
 Route::post('/save-category','App\Http\Controllers\CategoryController@saveCategory');
 Route::get('/edit-category/{id}','App\Http\Controllers\CategoryController@editCategory');
 Route::post('/update-category/{id}','App\Http\Controllers\CategoryController@updateCategory');
-Route::post('/delete-category/{id}','App\Http\Controllers\CategoryController@deleteCategory');
-Route::post('/restore-category/{id}','App\Http\Controllers\StoresController@restoreCategory');
+Route::get('/delete-category/{id}','App\Http\Controllers\CategoryController@deleteCategory');
+Route::get('/restore-category/{id}','App\Http\Controllers\StoresController@restoreCategory');
 
 // Product Routes
 Route::get('/show-products','App\Http\Controllers\CategoryController@showProducts');
@@ -47,8 +47,8 @@ Route::get('/create-product','App\Http\Controllers\CategoryController@createProd
 Route::post('/save-product','App\Http\Controllers\CategoryController@saveProduct');
 Route::get('/edit-product/{id}','App\Http\Controllers\CategoryController@editProduct');
 Route::post('/update-product/{id}','App\Http\Controllers\CategoryController@updateProduct');
-Route::post('/delete-product/{id}','App\Http\Controllers\CategoryController@deleteProduct');
-Route::post('/restore-product/{id}','App\Http\Controllers\StoresController@restoreProduct');
+Route::get('/delete-product/{id}','App\Http\Controllers\CategoryController@deleteProduct');
+Route::get('/restore-product/{id}','App\Http\Controllers\StoresController@restoreProduct');
 
 // Purchase Routes
 Route::get('/show-purchases','App\Http\Controllers\CategoryController@showPurchases');
@@ -56,5 +56,5 @@ Route::get('/create-purchase','App\Http\Controllers\CategoryController@createPur
 Route::post('/save-purchase','App\Http\Controllers\CategoryController@savePurchase');
 Route::get('/edit-purchase/{id}','App\Http\Controllers\CategoryController@editPurchase');
 Route::post('/update-purchase/{id}','App\Http\Controllers\CategoryController@updatePurchase');
-Route::post('/delete-purchase/{id}','App\Http\Controllers\CategoryController@deletePurchase');
-Route::post('/restore-storepurchase/{id}','App\Http\Controllers\StoresController@restorePurchase');
+Route::get('/delete-purchase/{id}','App\Http\Controllers\CategoryController@deletePurchase');
+Route::get('/restore-storepurchase/{id}','App\Http\Controllers\StoresController@restorePurchase');

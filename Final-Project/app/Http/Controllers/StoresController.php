@@ -15,7 +15,7 @@ class StoresController extends Controller
             return view('\pages\login')->with('alert', 'you have login first');
         }
 
-        $stores = StoreData::get();
+        $stores = StoreData::withTrashed()->get();
 
         $stores = $stores->map(function ($store) {
             $store->store_logo = Storage::disk('public')->url($store->store_logo);
