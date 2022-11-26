@@ -34,6 +34,7 @@
     <div class="author-page">
         <div class="container">
             @foreach ($stores_data as $store)
+                <br><br><br>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="author">
@@ -49,7 +50,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="main-button">
-                                        <a href="{{ URL('/edit-store/' . $store->id) }}">Edit Store</a>
+                                        <a href="{{ URL('/edit-store/' . $store->id) }}">Edit Store Data</a>
                                     </div>
                                 </div>
                             </div>
