@@ -15,12 +15,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('product_name')->unique();
-            $table->text('description_logo');
-            $table->integer('store_id');
-            $table->integer('category_id');
-            $table->integer('base_price');
-            $table->integer('discount_price')->nullable();
+            $table->integer('product_id')->unique();
+            $table->integer('purchase_price');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
