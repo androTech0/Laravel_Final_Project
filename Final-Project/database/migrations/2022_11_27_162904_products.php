@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('category_name');
-            $table->text('category_logo');
-            $table->text('products_count');
+            $table->text('product_name');
+            $table->text('description_logo');
+            $table->integer('base_price');
+            $table->integer('discount_price');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('categories');
+        Schema::drop('products');
     }
 };
