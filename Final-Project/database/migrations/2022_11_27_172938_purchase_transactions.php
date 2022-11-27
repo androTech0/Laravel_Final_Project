@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('purchase_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id')->unique();
+            $table->integer('product_id');
             $table->integer('purchase_price');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('products');
+        Schema::drop('purchase_transactions');
     }
 };
