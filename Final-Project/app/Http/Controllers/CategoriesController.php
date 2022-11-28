@@ -21,11 +21,6 @@ class CategoriesController extends Controller
             return $category;
         });
 
-        // foreach ($stores as $store) {
-        //     $img_link = Storage::url($store->store_logo);
-        //     $store->store_logo = $img_link;
-        // }
-
         // dd($store->toArray());
         return view('pages.category_pages.categories_view')->with('categories_data', $categories);
     }
@@ -101,20 +96,21 @@ class CategoriesController extends Controller
             $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
             $fullPath = $path . $name;
 
-            Storage::disk('local')->put($fullPath, file_get_contents($image));
+            Storage::disk('public')->put($fullPath, file_get_contents($image));
 
-            $status = Storage::disk('local')->exists($fullPath);
+            $status = Storage::disk('public')->exists($fullPath);
 
             if ($status) {
                 $category->category_logo = $fullPath;
             } else {
-                return redirect('/create-category')->with('alert', 'Data mistake !!');
+                return redirect('/update-category'."/".$id)->with('alert', 'Data mistake !!');
             }
         }
+        $category->category_name = $request['category-name'];
 
-            $category->category_name = $request['category-name'];
-            $category->category_logo = $fullPath;
+        if($category->category_name != null){
             $category->save();
+        }
 
         return redirect('/show-categories');
     }

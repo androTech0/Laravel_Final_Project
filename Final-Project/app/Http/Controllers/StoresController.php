@@ -22,11 +22,6 @@ class StoresController extends Controller
             return $store;
         });
 
-        // foreach ($stores as $store) {
-        //     $img_link = Storage::url($store->store_logo);
-        //     $store->store_logo = $img_link;
-        // }
-
         // dd($store->toArray());
         return view('pages.store_pages.stores_view')->with('stores_data', $stores);
     }
@@ -100,20 +95,23 @@ class StoresController extends Controller
             $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
             $fullPath = $path . $name;
 
-            Storage::disk('local')->put($fullPath, file_get_contents($image));
+            Storage::disk('public')->put($fullPath, file_get_contents($image));
 
-            $status = Storage::disk('local')->exists($fullPath);
+            $status = Storage::disk('public')->exists($fullPath);
 
             if ($status) {
                 $store->store_logo = $fullPath;
             } else {
-                return redirect('/edit-store')->with('alert', 'Data mistake !!');
+                return redirect('/edit-store'."/".$id)->with('alert', 'Data mistake !!');
             }
         }
 
         $store->store_name = $request['store-name'];
         $store->store_address = $request['store-address'];
-        $store->save();
+
+        if($store->store_name != null && $store->store_address != null){
+            $store->save();
+        }
 
         return redirect('/show-stores');
     }
