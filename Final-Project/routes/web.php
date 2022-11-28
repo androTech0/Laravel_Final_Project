@@ -33,28 +33,28 @@ Route::get('/delete-store/{id}','App\Http\Controllers\StoresController@deleteSto
 Route::get('/restore-store/{id}','App\Http\Controllers\StoresController@restoreStore');
 
 // Category Routes
-Route::get('/show-categories','App\Http\Controllers\CategoryController@showCategories');
-Route::get('/create-category','App\Http\Controllers\CategoryController@createCategory');
-Route::post('/save-category','App\Http\Controllers\CategoryController@saveCategory');
-Route::get('/edit-category/{id}','App\Http\Controllers\CategoryController@editCategory');
-Route::post('/update-category/{id}','App\Http\Controllers\CategoryController@updateCategory');
-Route::get('/delete-category/{id}','App\Http\Controllers\CategoryController@deleteCategory');
-Route::get('/restore-category/{id}','App\Http\Controllers\StoresController@restoreCategory');
+Route::get('/show-categories','App\Http\Controllers\CategoriesController@showCategories');
+Route::get('/create-category','App\Http\Controllers\CategoriesController@createCategory');
+Route::post('/save-category','App\Http\Controllers\CategoriesController@saveCategory');
+Route::get('/edit-category/{id}','App\Http\Controllers\CategoriesController@editCategory');
+Route::post('/update-category/{id}','App\Http\Controllers\CategoriesController@updateCategory');
+Route::get('/delete-category/{id}','App\Http\Controllers\CategoriesController@deleteCategory');
+Route::get('/restore-category/{id}','App\Http\Controllers\CategoriesController@restoreCategory');
 
 // Product Routes
-Route::get('/show-products','App\Http\Controllers\CategoryController@showProducts');
-Route::get('/create-product','App\Http\Controllers\CategoryController@createProduct');
-Route::post('/save-product','App\Http\Controllers\CategoryController@saveProduct');
-Route::get('/edit-product/{id}','App\Http\Controllers\CategoryController@editProduct');
-Route::post('/update-product/{id}','App\Http\Controllers\CategoryController@updateProduct');
-Route::get('/delete-product/{id}','App\Http\Controllers\CategoryController@deleteProduct');
-Route::get('/restore-product/{id}','App\Http\Controllers\StoresController@restoreProduct');
+Route::get('/show-products','App\Http\Controllers\ProductsController@showProducts');
+Route::get('/create-product','App\Http\Controllers\ProductsController@createProduct');
+Route::post('/save-product','App\Http\Controllers\ProductsController@saveProduct');
+Route::get('/edit-product/{id}','App\Http\Controllers\ProductsController@editProduct');
+Route::post('/update-product/{id}','App\Http\Controllers\ProductsController@updateProduct');
+Route::get('/delete-product/{id}','App\Http\Controllers\ProductsController@deleteProduct');
+Route::get('/restore-product/{id}','App\Http\Controllers\ProductsController@restoreProduct');
 
 // Purchase Routes
-Route::get('/show-purchases','App\Http\Controllers\CategoryController@showPurchases');
-Route::get('/create-purchase','App\Http\Controllers\CategoryController@createPurchase');
-Route::post('/save-purchase','App\Http\Controllers\CategoryController@savePurchase');
-Route::get('/edit-purchase/{id}','App\Http\Controllers\CategoryController@editPurchase');
-Route::post('/update-purchase/{id}','App\Http\Controllers\CategoryController@updatePurchase');
-Route::get('/delete-purchase/{id}','App\Http\Controllers\CategoryController@deletePurchase');
-Route::get('/restore-purchase/{id}','App\Http\Controllers\StoresController@restorePurchase');
+Route::get('/show-purchases','App\Http\Controllers\PurchaseTransactionsController@showPurchases');
+Route::get('/create-purchase','App\Http\Controllers\PurchaseTransactionsController@createPurchase');
+Route::post('/save-purchase','App\Http\Controllers\PurchaseTransactionsController@savePurchase');
+Route::get('/edit-purchase/{id}','App\Http\Controllers\PurchaseTransactionsController@editPurchase');
+Route::post('/update-purchase/{id}','App\Http\Controllers\PurchaseTransactionsController@updatePurchase');
+Route::get('/delete-purchase/{id}','App\Http\Controllers\PurchaseTransactionsController@deletePurchase');
+Route::get('/restore-purchase/{id}','App\Http\Controllers\PurchaseTransactionsController@restorePurchase');
