@@ -60,7 +60,7 @@ class CategoriesController extends Controller
 
         if ($status) {
             $category = new CategoryData();
-            $category->category_name = $request['category-name'];
+            $category->category_name = $request['category_name'];
             $category->category_logo = $fullPath;
             $category->save();
 
