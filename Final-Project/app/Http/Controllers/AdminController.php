@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
 
     public function signup(){
-        return view('/pages/signup');
+        return view('pages.login_pages.signup');
     }
 
     public function signupPost(Request $request)
@@ -45,7 +45,7 @@ class AdminController extends Controller
 
     public function login(){
         if(!Session::get('login')){
-            return view('\pages\login');
+            return view('pages.login_pages.login');
         }
         return redirect('/show-stores');
     }
@@ -83,7 +83,7 @@ class AdminController extends Controller
 
     public function logout(){
         if(!Session::get('login')){
-            return view('\pages\login')->with('alert','you have login first');
+            return view('pages.login_pages.login')->with('alert','you have login first');
         }
         Session::flush();
         return redirect('/login');

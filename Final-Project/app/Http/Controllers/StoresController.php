@@ -12,7 +12,7 @@ class StoresController extends Controller
     public function showStores()
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $stores = StoreData::withTrashed()->get();
@@ -28,28 +28,28 @@ class StoresController extends Controller
         // }
 
         // dd($store->toArray());
-        return view('\pages\stores_view')->with('stores_data', $stores);
+        return view('pages.store_pages.stores_view')->with('stores_data', $stores);
     }
 
     public function showTrashedStores()
     {
         $stores = StoreData::onlyTrashed()->get();
 
-        return view('\pages\stores-trash')->with('stores_data', $stores);
+        return view('pages.store_pages.stores-trash')->with('stores_data', $stores);
     }
 
     public function createStore()
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-        return view('\pages\create_store');
+        return view('pages.store_pages.create_store');
     }
 
     public function saveStore(Request $request)
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $image = $request->file('logo-image');
@@ -77,19 +77,19 @@ class StoresController extends Controller
     public function editStore($id)
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $storeData = StoreData::where('id', $id)
             ->first();
 
-        return view('\pages\edit_store')->with('storeData', $storeData);
+        return view('pages.store_pages.edit_store')->with('storeData', $storeData);
     }
 
     public function updateStore(Request $request, $id)
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $store = StoreData::where('id', $id)->first();
@@ -121,7 +121,7 @@ class StoresController extends Controller
     public function deleteStore($id)
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $result = StoreData::where('id', $id)->delete();
