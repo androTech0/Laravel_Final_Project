@@ -17,7 +17,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('category_name');
             $table->text('category_logo');
-            $table->text('products_count');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
