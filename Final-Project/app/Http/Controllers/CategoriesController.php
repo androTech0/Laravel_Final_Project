@@ -61,6 +61,7 @@ class CategoriesController extends Controller
         if ($status) {
             $category = new CategoryData();
             $category->category_name = $request['category_name'];
+            $category->category_description = $request['category_description'];
             $category->category_logo = $fullPath;
             $category->save();
 
@@ -103,12 +104,14 @@ class CategoriesController extends Controller
             if ($status) {
                 $category->category_logo = $fullPath;
             } else {
-                return redirect('/update-category'."/".$id)->with('alert', 'Data mistake !!');
+                return redirect('/edit-category'."/".$id)->with('alert', 'Data mistake !!');
             }
         }
-        $category->category_name = $request['category-name'];
 
-        if($category->category_name != null){
+        $category->category_name = $request['category-name'];
+        $category->category_description = $request['category_description-name'];
+
+        if($category->category_name != null && $category->category_description != null){
             $category->save();
         }
 

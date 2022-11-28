@@ -107,7 +107,7 @@ class ProductsController extends Controller
             if ($status) {
                 $product->product_image = $fullPath;
             } else {
-                return redirect('/update-product'."/".$id)->with('alert', 'Data mistake !!');
+                return redirect('/edit-product'."/".$id)->with('alert', 'Data mistake !!');
             }
         }
 

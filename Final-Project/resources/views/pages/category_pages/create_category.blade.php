@@ -37,8 +37,14 @@
                             </div>
                             <div class="col-lg-4">
                                 <fieldset>
+                                    <label for="category_description">Category Description</label>
+                                    <input type="text" name="category_description" id="title" autocomplete="on" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-4">
+                                <fieldset>
                                     <label for="logo-image">Category Logo</label>
-                                    <input type="file" id="file" name="logo-image" />
+                                    <input type="file" id="file" name="logo-image" required/>
                                 </fieldset>
                             </div>
                             <div class="col-lg-4">

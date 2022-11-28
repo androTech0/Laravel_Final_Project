@@ -31,4 +31,45 @@
             </div>
         </div>
     </div>
+    <div class="categories-collections">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="collections">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-heading">
+                                    <div class="line-dec"></div>
+                                    <h2>Explore All <em>Categories</em> In Market.</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="owl-collection owl-carousel">
+                                    @foreach ($categories_data as $category)
+                                        <div class="item">
+                                            <img src="{{ $category->category_logo }}" alt="">
+                                            <div class="down-content">
+                                                <h4>{{ $category->category_description }}</h4>
+                                                <span class="collection">Items In
+                                                    Category:<br><strong>310/340</strong></span>
+                                                <span
+                                                    class="category">Category:<br><strong>{{ $category->category_name }}</strong></span>
+                                                <br><br>
+                                                <div class="border-button">
+                                                    <a href="{{ URL('/edit-category/'.$category->id) }}">Edit Category</a>
+                                                </div>
+                                                <div class="main-button">
+                                                    <a>Explore Products</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
