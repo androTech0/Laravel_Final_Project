@@ -11,4 +11,19 @@ class ProductData extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "products";
+
+    public function Store()
+    {
+        return $this->belongsTo('App\Models\StoreData');
+    }
+
+    public function Category()
+    {
+        return $this->belongsTo('App\Models\CategoryData');
+    }
+
+    public function PurchaseTransactions()
+    {
+        return $this->hasMany('App\Models\PurchaseTransactionsData');
+    }
 }

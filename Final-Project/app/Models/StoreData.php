@@ -11,4 +11,9 @@ class StoreData extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "stores";
+
+    public function Products()
+    {
+        return $this->hasMany('App\Models\ProductData');
+    }
 }
