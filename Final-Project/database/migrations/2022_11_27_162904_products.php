@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id',true);
             $table->text('product_name')->unique();
             $table->text('description_logo');
             $table->integer('store_id');
@@ -23,6 +23,12 @@ return new class extends Migration
             $table->integer('discount_price')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->foreign('category_id')
+                    ->references('id')
+                    ->on('categories');
+            $table->foreign('store_id')
+                    ->references('id')
+                    ->on('stores');
         });
     }
 
