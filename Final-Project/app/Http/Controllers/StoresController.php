@@ -107,7 +107,7 @@ class StoresController extends Controller
             if ($status) {
                 $store->store_logo = $fullPath;
             } else {
-                return redirect('/create-store')->with('alert', 'Data mistake !!');
+                return redirect('/edit-store')->with('alert', 'Data mistake !!');
             }
         }
 

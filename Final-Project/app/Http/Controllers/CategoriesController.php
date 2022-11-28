@@ -11,7 +11,7 @@ class CategoriesController extends Controller
     public function showCategories()
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $categories = CategoryData::withTrashed()->get();
@@ -27,11 +27,14 @@ class CategoriesController extends Controller
         // }
 
         // dd($store->toArray());
-        return view('\pages\category_view')->with('categories_data', $categories);
+        return view('pages.category_pages.categories_view')->with('categories_data', $categories);
     }
 
     public function showTrashedCategory()
     {
+        if (!Session::get('login')) {
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
+        }
         $categories = CategoryData::onlyTrashed()->get();
 
         return view('\pages\categories-trash')->with('categories_data', $categories);
@@ -40,19 +43,19 @@ class CategoriesController extends Controller
     public function createCategory()
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-        return view('pages.create_store');
+        return view('pages.category_pages.create_category');
     }
 
     public function saveCategory(Request $request)
     {
         if (!Session::get('login')) {
-            return view('pages.login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $image = $request->file('logo-image');
-        $path = 'uploads/categories-images';
+        $path = 'uploads/categories-images/';
         $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
         $fullPath = $path . $name;
 
@@ -62,7 +65,7 @@ class CategoriesController extends Controller
 
         if ($status) {
             $category = new CategoryData();
-            $category->category_name = $request['store-name'];
+            $category->category_name = $request['category-name'];
             $category->category_logo = $fullPath;
             $category->save();
 
@@ -72,29 +75,29 @@ class CategoriesController extends Controller
         }
     }
 
-    public function editStore($id)
+    public function editCategory($id)
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $storeData = CategoryData::where('id', $id)
+        $categoryData = CategoryData::where('id', $id)
             ->first();
 
-        return view('\pages\edit_store')->with('storeData', $storeData);
+        return view('pages.category_pages.edit_category')->with('categoryData', $categoryData);
     }
 
-    public function updateStore(Request $request, $id)
+    public function updateCategory(Request $request, $id)
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $store = CategoryData::where('id', $id)->first();
+        $category = CategoryData::where('id', $id)->first();
 
         $image = $request->file('logo-image');
         if ($image != null) {
-            $path = 'uploads/store-logos/';
+            $path = 'uploads/categories-images/';
             $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
             $fullPath = $path . $name;
 
@@ -103,33 +106,36 @@ class CategoriesController extends Controller
             $status = Storage::disk('local')->exists($fullPath);
 
             if ($status) {
-                $store->store_logo = $fullPath;
+                $category->category_logo = $fullPath;
             } else {
-                return redirect('/create-store')->with('alert', 'Data mistake !!');
+                return redirect('/create-category')->with('alert', 'Data mistake !!');
             }
         }
 
-        $store->store_name = $request['store-name'];
-        $store->store_address = $request['store-address'];
-        $store->save();
+            $category->category_name = $request['category-name'];
+            $category->category_logo = $fullPath;
+            $category->save();
 
-        return redirect('/show-stores');
+        return redirect('/show-categories');
     }
 
-    public function deleteStore($id)
+    public function deleteCategory($id)
     {
         if (!Session::get('login')) {
-            return view('\pages\login')->with('alert', 'you have login first');
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
         $result = CategoryData::where('id', $id)->delete();
 
-        return redirect('/show-stores');
+        return redirect('/show-categories');
     }
 
-    public function restoreStore($id)
+    public function restoreCategory($id)
     {
+        if (!Session::get('login')) {
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
+        }
         $result = CategoryData::onlyTrashed()->where('id', $id)->restore();
-        return redirect('/show-stores');
+        return redirect('/show-categories');
     }
 }

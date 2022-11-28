@@ -57,4 +57,4 @@ Route::post('/save-purchase','App\Http\Controllers\CategoryController@savePurcha
 Route::get('/edit-purchase/{id}','App\Http\Controllers\CategoryController@editPurchase');
 Route::post('/update-purchase/{id}','App\Http\Controllers\CategoryController@updatePurchase');
 Route::get('/delete-purchase/{id}','App\Http\Controllers\CategoryController@deletePurchase');
-Route::get('/restore-storepurchase/{id}','App\Http\Controllers\StoresController@restorePurchase');
+Route::get('/restore-purchase/{id}','App\Http\Controllers\StoresController@restorePurchase');
