@@ -51,7 +51,7 @@
                                             <div class="down-content">
                                                 <h4>{{ $category->category_description }}</h4>
                                                 <span class="collection">Items In
-                                                    Category:<br><strong>310/340</strong></span>
+                                                    Category:<br><strong>{{ $category->products_count}}</strong></span>
                                                 <span
                                                     class="category">Category:<br><strong>{{ $category->category_name }}</strong></span>
                                                 <br><br>

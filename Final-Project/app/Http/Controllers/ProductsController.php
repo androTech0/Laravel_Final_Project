@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\ProductData;
 use App\Models\CategoryData;
 use App\Models\StoreData;
+
 class ProductsController extends Controller
 {
     public function showProducts()
@@ -16,12 +17,14 @@ class ProductsController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $products = ProductData::withTrashed()->get();
-
+        $products = ProductData::with('Category')->with('Store')->withTrashed()->get();
+        //dd($products->toArray());
         $products = $products->map(function ($product) {
             $product->product_image = Storage::disk('public')->url($product->product_image);
+            $product->store->store_logo = Storage::disk('public')->url($product->store->store_logo);
             return $product;
         });
+
 
         return view('pages.product_pages.products_view')->with('products_data', $products);
     }
@@ -46,8 +49,8 @@ class ProductsController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
         return view('pages.product_pages.create_category')
-        ->with('categoriesData', $categories)
-        ->with('storesData', $stores);
+            ->with('categoriesData', $categories)
+            ->with('storesData', $stores);
     }
 
     public function saveProduct(Request $request)
@@ -88,11 +91,15 @@ class ProductsController extends Controller
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-
+        $categories = CategoryData::withTrashed()->get();
+        $stores = StoreData::withTrashed()->get();
         $productData = ProductData::where('id', $id)
             ->first();
 
-        return view('pages.product_pages.edit_category')->with('productData', $productData);
+        return view('pages.product_pages.edit_category')
+        ->with('product', $productData)
+        ->with('categoriesData', $categories)
+        ->with('storesData', $stores);
     }
 
     public function updateProduct(Request $request, $id)
@@ -116,7 +123,7 @@ class ProductsController extends Controller
             if ($status) {
                 $product->product_image = $fullPath;
             } else {
-                return redirect('/edit-product'."/".$id)->with('alert', 'Data mistake !!');
+                return redirect('/edit-product' . "/" . $id)->with('alert', 'Data mistake !!');
             }
         }
 
@@ -128,15 +135,16 @@ class ProductsController extends Controller
         $product->discount_price = $request['discount_price'];
         $product->active_discount = $request['active_discount'];
 
-        if($product->product_name != null
+        if (
+            $product->product_name != null
             && $product->description != null
             && $product->store_id != null
             && $product->category_id != null
             && $product->base_price != null
             && $product->discount_price != null
-            ){
-                $product->save();
-            }
+        ) {
+            $product->save();
+        }
 
 
         return redirect('/show-products');

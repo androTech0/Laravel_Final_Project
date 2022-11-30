@@ -10,9 +10,9 @@ class CategoryData extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "categories";
-
+    protected $primaryKey = 'id';
     public function Products()
     {
-        return $this->hasMany('App\Models\ProductData');
+        return $this->hasMany('App\Models\ProductData','category_id');
     }
 }

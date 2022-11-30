@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('visa_card');
             $table->text('user_image');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

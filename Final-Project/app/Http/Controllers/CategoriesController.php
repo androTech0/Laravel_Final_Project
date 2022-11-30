@@ -13,9 +13,7 @@ class CategoriesController extends Controller
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-
-        $categories = CategoryData::with('Products')->select('*')->withTrashed()->get();
-        dd($categories->toArray());
+        $categories = CategoryData::withCount('Products')->get();
         $categories = $categories->map(function ($category) {
             $category->category_logo = Storage::disk('public')->url($category->category_logo);
             return $category;

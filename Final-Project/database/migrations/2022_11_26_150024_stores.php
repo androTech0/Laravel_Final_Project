@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('store_address');
             $table->text('store_logo');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

@@ -11,9 +11,9 @@ class PurchaseTransactionsData extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "purchase_transactions";
-
+    protected $primaryKey = 'id';
     public function Product()
     {
-        return $this->belongsTo('App\Models\ProductData');
+        return $this->belongsTo('App\Models\ProductData','product_id');
     }
 }

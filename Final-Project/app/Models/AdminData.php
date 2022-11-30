@@ -10,4 +10,5 @@ class AdminData extends Model
     use HasFactory;
 
     protected $table = "managers";
+    protected $primaryKey = 'id';
 }
