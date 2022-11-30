@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\ProductData;
+use App\Models\CategoryData;
+use App\Models\StoreData;
 class ProductsController extends Controller
 {
     public function showProducts()
@@ -36,10 +38,16 @@ class ProductsController extends Controller
 
     public function createProduct()
     {
+
+        $categories = CategoryData::withTrashed()->get();
+        $stores = StoreData::withTrashed()->get();
+
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-        return view('pages.product_pages.create_category');
+        return view('pages.product_pages.create_category')
+        ->with('categoriesData', $categories)
+        ->with('storesData', $stores);
     }
 
     public function saveProduct(Request $request)
@@ -66,6 +74,7 @@ class ProductsController extends Controller
             $product->category_id = $request['category_id'];
             $product->base_price = $request['base_price'];
             $product->discount_price = $request['discount_price'];
+            $product->active_discount = $request['active_discount'];
             $product->save();
 
             return redirect('/show-products');
@@ -117,6 +126,7 @@ class ProductsController extends Controller
         $product->category_id = $request['category_id'];
         $product->base_price = $request['base_price'];
         $product->discount_price = $request['discount_price'];
+        $product->active_discount = $request['active_discount'];
 
         if($product->product_name != null
             && $product->description != null

@@ -10,6 +10,8 @@
 
 <!-- Additional CSS Files -->
 <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/category-list.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/toggle-price.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/templatemo-liberty-market.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">

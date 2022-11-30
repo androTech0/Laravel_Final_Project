@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->integer('base_price');
             $table->integer('discount_price')->nullable();
+            $table->boolean('active_discount')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->foreign('category_id')
