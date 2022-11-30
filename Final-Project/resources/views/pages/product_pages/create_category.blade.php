@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <form id="contact" action="{{ URL('/save-store') }}" method="post" enctype="multipart/form-data">
+                    <form id="contact" action="{{ URL('/save-product') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-4">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <fieldset>
-                                    <label for="discount_price">Product Discount</label>
+                                    <label for="discount_price">Discount Price</label>
                                     <input type="number" name="discount_price" id="description" autocomplete="on" required>
                                 </fieldset>
                             </div>
@@ -86,8 +86,8 @@
                                 <fieldset>
                                     <label for="active_discount">Active Discount</label>
                                     <br><br>
-                                    <input value="true" type="radio" name="active_discount" id="yes" checked>
-                                    <input value="false" type="radio" name="active_discount" id="no">
+                                    <input value="1" type="radio" name="active_discount" id="yes" checked>
+                                    <input value="0" type="radio" name="active_discount" id="no">
                                     <div class="switch">
                                         <label for="yes">Yes</label>
                                         <label for="no">No</label>
