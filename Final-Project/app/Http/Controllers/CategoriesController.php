@@ -108,8 +108,8 @@ class CategoriesController extends Controller
             }
         }
 
-        $category->category_name = $request['category-name'];
-        $category->category_description = $request['category_description-name'];
+        $category->category_name = $request['category_name'];
+        $category->category_description = $request['category_description'];
 
         if($category->category_name != null && $category->category_description != null){
             $category->save();
