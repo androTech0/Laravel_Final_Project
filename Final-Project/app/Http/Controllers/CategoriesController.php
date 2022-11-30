@@ -14,8 +14,8 @@ class CategoriesController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $categories = CategoryData::withTrashed()->get();
-
+        $categories = CategoryData::with('Products')->select('*')->withTrashed()->get();
+        dd($categories->toArray());
         $categories = $categories->map(function ($category) {
             $category->category_logo = Storage::disk('public')->url($category->category_logo);
             return $category;
