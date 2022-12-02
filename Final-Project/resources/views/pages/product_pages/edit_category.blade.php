@@ -69,8 +69,8 @@
                                     <div class="select">
                                         <select name="store_id">
                                             @foreach ($storesData as $store)
-                                                @if ($store->id = $product->store_id)
-                                                    <option value="{{ $store->id }}" @selected(true)>
+                                                @if ($store->id == $product->store_id)
+                                                    <option value="{{ $store->id }}" selected>
                                                         {{ $store->store_name }}
                                                     </option>
                                                 @else
@@ -87,8 +87,9 @@
                                     <div class="select">
                                         <select name="category_id">
                                             @foreach ($categoriesData as $category)
-                                                @if ($category->id = $product->category_id)
-                                                    <option value="{{ $category->id }}">{{ $category->category_name }}
+                                                @if ($category->id == $product->category_id)
+                                                    <option value="{{ $category->id }}" selected>
+                                                        {{ $category->category_name }}
                                                     </option>
                                                 @else
                                                     <option value="{{ $category->id }}">{{ $category->category_name }}

@@ -95,7 +95,7 @@ class ProductsController extends Controller
         $stores = StoreData::withTrashed()->get();
         $productData = ProductData::where('id', $id)
             ->first();
-
+        
         return view('pages.product_pages.edit_category')
         ->with('product', $productData)
         ->with('categoriesData', $categories)
