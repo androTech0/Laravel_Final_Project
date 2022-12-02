@@ -169,4 +169,36 @@ class ProductsController extends Controller
         $result = ProductData::onlyTrashed()->where('id', $id)->restore();
         return redirect('/show-products');
     }
+
+    public function showStoreProducts($id){
+        $storeData = StoreData::where('id', $id)
+        ->with('Products')
+        ->first();
+
+        $storeData->store_logo = Storage::disk('public')->url($storeData->store_logo);
+        $storeData->products = $storeData->products->map(function ($product) {
+            $product->product_image= Storage::disk('public')->url($product->product_image);
+            return $product;
+        });
+        // dd($storeData->toArray());
+        return view('pages.product_pages.store_products_view')
+            ->with('storeData',$storeData);
+    }
+
+    public function showCategoryProducts($id){
+        $categoryData = CategoryData::where('id', $id)
+        ->with('Products')
+        ->first();
+
+        $categoryData->category_logo = Storage::disk('public')->url($categoryData->category_logo);
+        $categoryData->products = $categoryData->products->map(function ($product) {
+            $product->product_image= Storage::disk('public')->url($product->product_image);
+            return $product;
+        });
+
+        // dd($categoryData->toArray());
+
+        return view('pages.product_pages.category_products_view')
+            ->with('categoryData',$categoryData);
+    }
 }

@@ -1,7 +1,7 @@
 @extends('layouts\main-layout')
 
 @section('page-title')
-    <title>Stores Page</title>
+    <title>Products Page</title>
 @endsection
 
 @section('top-menu')

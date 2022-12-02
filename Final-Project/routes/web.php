@@ -43,6 +43,8 @@ Route::get('/restore-category/{id}','App\Http\Controllers\CategoriesController@r
 
 // Product Routes
 Route::get('/show-products','App\Http\Controllers\ProductsController@showProducts');
+Route::get('/show-store-products/{id}','App\Http\Controllers\ProductsController@showStoreProducts');
+Route::get('/show-category-products/{id}','App\Http\Controllers\ProductsController@showCategoryProducts');
 Route::get('/create-product','App\Http\Controllers\ProductsController@createProduct');
 Route::post('/save-product','App\Http\Controllers\ProductsController@saveProduct');
 Route::get('/edit-product/{id}','App\Http\Controllers\ProductsController@editProduct');

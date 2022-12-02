@@ -59,7 +59,7 @@
                                                     <a href="{{ URL('/edit-category/'.$category->id) }}">Edit Category</a>
                                                 </div>
                                                 <div class="main-button">
-                                                    <a>Explore Products</a>
+                                                    <a href="{{URL('/show-category-products/'.$category->id)}}">Explore Products</a>
                                                 </div>
                                             </div>
                                         </div>
