@@ -59,7 +59,7 @@ class StoresController extends Controller
         if ($status) {
             $store = new StoreData();
             $store->store_name = $request['store-name'];
-            $store->store_address = $request['store-address'];
+            $store->store_description = $request['store-description'];
             $store->store_logo = $fullPath;
             $store->save();
 
@@ -90,30 +90,34 @@ class StoresController extends Controller
         $store = StoreData::where('id', $id)->first();
 
         $image = $request->file('logo-image');
-        if ($image != null) {
-            $path = 'uploads/store-logos/';
-            $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
-            $fullPath = $path . $name;
 
-            Storage::disk('public')->put($fullPath, file_get_contents($image));
+        $path = 'uploads/store-logos/';
+        $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
+        $fullPath = $path . $name;
 
-            $status = Storage::disk('public')->exists($fullPath);
+        Storage::disk('public')->put($fullPath, file_get_contents($image));
 
-            if ($status) {
-                $store->store_logo = $fullPath;
-            } else {
-                return redirect('/edit-store'."/".$id)->with('alert', 'Data mistake !!');
-            }
+        $status = Storage::disk('public')->exists($fullPath);
+
+        if ($status) {
+            $store->store_logo = $fullPath;
+        } else {
+
         }
+
 
         $store->store_name = $request['store-name'];
-        $store->store_address = $request['store-address'];
+        $store->store_description = $request['store-description'];
 
-        if($store->store_name != null && $store->store_address != null){
+        if ($store->store_name != null && $store->store_description != null) {
             $store->save();
+            return redirect('/show-stores');
+        }
+        else{
+            return redirect('/edit-store' . "/" . $id)->with('alert', 'Data mistake !!');
         }
 
-        return redirect('/show-stores');
+
     }
 
     public function deleteStore($id)

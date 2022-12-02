@@ -37,9 +37,9 @@
                             </div>
                             <div class="col-lg-4">
                                 <fieldset>
-                                    <label for="store-address">Address For Store</label>
-                                    <input type="text" name="store-address" id="description"
-                                    value="{{$storeData->store_address}}" autocomplete="on" required>
+                                    <label for="store-description">Description For Store</label>
+                                    <input type="text" name="store-description" id="description"
+                                    value="{{$storeData->store_description}}" autocomplete="on" required>
                                 </fieldset>
                             </div>
                             <div class="col-lg-4">

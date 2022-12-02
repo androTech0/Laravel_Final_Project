@@ -11,7 +11,7 @@ class ProductData extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "products";
-    protected $primaryKey = 'id';
+    
     public function Store()
     {
         return $this->belongsTo('App\Models\StoreData','store_id');

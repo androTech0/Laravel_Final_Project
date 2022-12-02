@@ -38,14 +38,15 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="author">
-                            <img src="{{ $store->store_logo }}" style="border-radius: 50%; max-width: 170px;">
+                            <img src="{{ $store->store_logo }}" style="border-radius: 10%; max-width: 170px; max-height: 100px;">
                             <h4>{{ $store->store_name }}
                                 <br>
-                                <p style="color: darkmagenta;"> {{ $store->store_address }} </p>
+                                <p style="color: darkmagenta;"> {{ $store->store_description }} </p>
                             </h4>
                         </div>
                     </div>
                     <div class="col-lg-6">
+                        <br><br>
                         <div class="right-info">
                             <div class="row">
                                 <div class="col-12">

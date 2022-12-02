@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->integer('id',true);
             $table->text('store_name');
-            $table->text('store_address');
+            $table->text('store_description');
             $table->text('store_logo');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
