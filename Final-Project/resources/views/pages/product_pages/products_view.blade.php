@@ -129,7 +129,7 @@
                                     </div>
                                     @else
                                     <div class="col-6">
-                                        <span>Base Price: <br> <strong>{{$product->base_price}}</strong></span>
+                                        <span>Base Price: <br> <strong>{{$product->base_price}}</strong> ETH</span>
                                     </div>
                                     @endif
 

@@ -90,21 +90,21 @@ class StoresController extends Controller
         $store = StoreData::where('id', $id)->first();
 
         $image = $request->file('logo-image');
+        if ($image != null) {
+            $path = 'uploads/store-logos/';
+            $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
+            $fullPath = $path . $name;
 
-        $path = 'uploads/store-logos/';
-        $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
-        $fullPath = $path . $name;
+            Storage::disk('public')->put($fullPath, file_get_contents($image));
 
-        Storage::disk('public')->put($fullPath, file_get_contents($image));
+            $status = Storage::disk('public')->exists($fullPath);
 
-        $status = Storage::disk('public')->exists($fullPath);
-
-        if ($status) {
-            $store->store_logo = $fullPath;
-        } else {
-
+            if ($status) {
+                $store->store_logo = $fullPath;
+            } else {
+                return redirect('/edit-store' . "/" . $id)->with('alert', 'Data mistake !!');
+            }
         }
-
 
         $store->store_name = $request['store-name'];
         $store->store_description = $request['store-description'];
@@ -112,12 +112,9 @@ class StoresController extends Controller
         if ($store->store_name != null && $store->store_description != null) {
             $store->save();
             return redirect('/show-stores');
-        }
-        else{
+        } else {
             return redirect('/edit-store' . "/" . $id)->with('alert', 'Data mistake !!');
         }
-
-
     }
 
     public function deleteStore($id)

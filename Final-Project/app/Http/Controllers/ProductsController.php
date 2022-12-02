@@ -48,7 +48,7 @@ class ProductsController extends Controller
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-        return view('pages.product_pages.create_category')
+        return view('pages.product_pages.create_product')
             ->with('categoriesData', $categories)
             ->with('storesData', $stores);
     }
@@ -95,8 +95,8 @@ class ProductsController extends Controller
         $stores = StoreData::withTrashed()->get();
         $productData = ProductData::where('id', $id)
             ->first();
-        
-        return view('pages.product_pages.edit_category')
+
+        return view('pages.product_pages.edit_product')
         ->with('product', $productData)
         ->with('categoriesData', $categories)
         ->with('storesData', $stores);

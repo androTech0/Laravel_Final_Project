@@ -86,8 +86,8 @@
                                 <fieldset>
                                     <label for="active_discount">Active Discount</label>
                                     <br><br>
-                                    <input value="1" type="radio" name="active_discount" id="yes" checked>
-                                    <input value="0" type="radio" name="active_discount" id="no">
+                                    <input value="1" type="radio" name="active_discount" id="yes">
+                                    <input value="0" type="radio" name="active_discount" id="no" checked>
                                     <div class="switch">
                                         <label for="yes">Yes</label>
                                         <label for="no">No</label>
