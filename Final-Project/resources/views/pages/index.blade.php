@@ -13,5 +13,5 @@
 @endsection
 
 @section('content')
-    @include('layouts\index-top-banner')
+    @include('layouts\index-top-banner');
 @endsection

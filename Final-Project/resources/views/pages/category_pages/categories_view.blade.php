@@ -51,15 +51,28 @@
                                             <div class="down-content">
                                                 <h4>{{ $category->category_description }}</h4>
                                                 <span class="collection">Items In
-                                                    Category:<br><strong>{{ $category->products_count}}</strong></span>
+                                                    Category:<br><strong>{{ $category->products_count }}</strong></span>
                                                 <span
                                                     class="category">Category:<br><strong>{{ $category->category_name }}</strong></span>
                                                 <br><br>
                                                 <div class="border-button">
-                                                    <a href="{{ URL('/edit-category/'.$category->id) }}">Edit Category</a>
+                                                    <a href="{{ URL('/edit-category/' . $category->id) }}">Edit
+                                                        Category</a>
                                                 </div>
+                                                @if ($category->deleted_at)
+                                                    <div class="border-button">
+                                                        <a href="{{ URL('/restore-category/' . $category->id) }}">View
+                                                            Category</a>
+                                                    </div>
+                                                @else
+                                                    <div class="border-button">
+                                                        <a href="{{ URL('/delete-category/' . $category->id) }}">Hide
+                                                            Category</a>
+                                                    </div>
+                                                @endif
                                                 <div class="main-button">
-                                                    <a href="{{URL('/show-category-products/'.$category->id)}}">Explore Products</a>
+                                                    <a href="{{ URL('/show-category-products/' . $category->id) }}">Explore
+                                                        Products</a>
                                                 </div>
                                             </div>
                                         </div>
