@@ -12,7 +12,11 @@
 <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/category-list.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/toggle-price.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/templatemo-hexashop.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/templatemo-liberty-market.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/owl-carousel.css') }}">
 <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
