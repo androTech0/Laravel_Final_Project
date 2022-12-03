@@ -97,9 +97,9 @@ class ProductsController extends Controller
             ->first();
 
         return view('pages.product_pages.edit_product')
-        ->with('product', $productData)
-        ->with('categoriesData', $categories)
-        ->with('storesData', $stores);
+            ->with('product', $productData)
+            ->with('categoriesData', $categories)
+            ->with('storesData', $stores);
     }
 
     public function updateProduct(Request $request, $id)
@@ -170,35 +170,43 @@ class ProductsController extends Controller
         return redirect('/show-products');
     }
 
-    public function showStoreProducts($id){
+    public function showStoreProducts($id)
+    {
         $storeData = StoreData::where('id', $id)
-        ->with('Products')
-        ->first();
+            ->with('Products')
+            ->with('Products.Category')
+            ->first();
 
         $storeData->store_logo = Storage::disk('public')->url($storeData->store_logo);
         $storeData->products = $storeData->products->map(function ($product) {
-            $product->product_image= Storage::disk('public')->url($product->product_image);
+            $product->product_image = Storage::disk('public')->url($product->product_image);
+            $product->category->category_logo = Storage::disk('public')->url($product->category->category_logo);
             return $product;
         });
+
         // dd($storeData->toArray());
+
         return view('pages.product_pages.store_products_view')
-            ->with('storeData',$storeData);
+            ->with('storeData', $storeData);
     }
 
-    public function showCategoryProducts($id){
+    public function showCategoryProducts($id)
+    {
         $categoryData = CategoryData::where('id', $id)
-        ->with('Products')
-        ->first();
+            ->with('Products')
+            ->with('Products.Store')
+            ->first();
 
         $categoryData->category_logo = Storage::disk('public')->url($categoryData->category_logo);
         $categoryData->products = $categoryData->products->map(function ($product) {
-            $product->product_image= Storage::disk('public')->url($product->product_image);
+            $product->product_image = Storage::disk('public')->url($product->product_image);
+            $product->store->store_logo = Storage::disk('public')->url($product->store->store_logo);
             return $product;
         });
 
         // dd($categoryData->toArray());
 
         return view('pages.product_pages.category_products_view')
-            ->with('categoryData',$categoryData);
+            ->with('categoryData', $categoryData);
     }
 }

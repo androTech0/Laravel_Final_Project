@@ -109,12 +109,27 @@
                                                     ETH</span>
                                             </div>
                                         @endif
-                                        {{-- <div class="col-6">
+                                        <div class="col-6">
                                             <span>Category: <br>
                                                 <strong>{{ $product->category->category_name }}</strong></span>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="line-dec"></div>
+                                @if ($product->deleted_at)
+                                    <div class="col-lg-12">
+                                        <div class="border-button">
+                                            <a href="{{ URL('/restore-product/' . $product->id) }}">View Product</a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="col-lg-12">
+                                        <div class="border-button">
+                                            <a href="{{ URL('/delete-product/' . $product->id) }}">Hide Product</a>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-lg-12">
                                     <div class="main-button">
                                         <a href="{{ URL('/edit-product/' . $product->id) }}">Edit Product</a>

@@ -52,7 +52,10 @@
                         <div class="item">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <br>
+                                    <span class="author">
+                                        <img src="{{ $product->store->store_logo }}" alt=""
+                                            style="max-width: 50px; max-height: 50px; border-radius: 50%;">
+                                    </span>
                                     <img src="{{ $product->product_image }}" alt="" style="border-radius: 20px;">
                                     <h4>{{ $product->product_name }}</h4>
                                 </div>
@@ -76,6 +79,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="line-dec"></div>
+                                @if ($product->deleted_at)
+                                    <div class="col-lg-12">
+                                        <div class="border-button">
+                                            <a href="{{ URL('/restore-product/' . $product->id) }}">View Product</a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="col-lg-12">
+                                        <div class="border-button">
+                                            <a href="{{ URL('/delete-product/' . $product->id) }}">Hide Product</a>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-lg-12">
                                     <div class="main-button">
                                         <a href="{{ URL('/edit-product/' . $product->id) }}">Edit Product</a>
