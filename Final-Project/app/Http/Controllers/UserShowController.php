@@ -198,7 +198,21 @@ class UserShowController extends Controller
         }
     }
 
-    public function viewProductDetails($id){
+    public function viewProductDetails($id)
+    {
 
+        $product = ProductData::where('id', $id)
+            ->with('Category')
+            ->with('Store')
+            ->first();
+
+        $product->product_image = Storage::disk('public')->url($product->product_image);
+        $product->store->store_logo = Storage::disk('public')->url($product->store->store_logo);
+        $product->category->category_logo = Storage::disk('public')->url($product->category->category_logo);
+
+        // dd($product->toArray());
+
+        return view('pages.user_pages.view_product_details')
+        ->with('product',$product);
     }
 }

@@ -1643,6 +1643,8 @@ Details Page Style
 
 .item-details-page .left-image {
   margin-right: 30px;
+  max-width: 600px;
+  max-height: 800px;
 }
 
 .item-details-page h4 {
