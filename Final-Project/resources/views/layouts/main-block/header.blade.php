@@ -19,4 +19,4 @@
 <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/owl-carousel.css') }}">
-<link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
