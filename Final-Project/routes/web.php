@@ -47,10 +47,10 @@ Route::get('/delete-product/{id}', 'App\Http\Controllers\ProductsController@dele
 Route::get('/restore-product/{id}', 'App\Http\Controllers\ProductsController@restoreProduct');
 
 // Purchase Routes
-Route::get('/show-purchases', 'App\Http\Controllers\PurchaseTransactionsController@showPurchases');
-Route::get('/create-purchase', 'App\Http\Controllers\PurchaseTransactionsController@createPurchase');
-Route::post('/save-purchase', 'App\Http\Controllers\PurchaseTransactionsController@savePurchase');
-Route::get('/edit-purchase/{id}', 'App\Http\Controllers\PurchaseTransactionsController@editPurchase');
-Route::post('/update-purchase/{id}', 'App\Http\Controllers\PurchaseTransactionsController@updatePurchase');
-Route::get('/delete-purchase/{id}', 'App\Http\Controllers\PurchaseTransactionsController@deletePurchase');
-Route::get('/restore-purchase/{id}', 'App\Http\Controllers\PurchaseTransactionsController@restorePurchase');
+Route::get('/show-transactions', 'App\Http\Controllers\PurchaseTransactionsController@showPurchases');
+Route::get('/create-transaction', 'App\Http\Controllers\PurchaseTransactionsController@createPurchase');
+Route::post('/save-transaction', 'App\Http\Controllers\PurchaseTransactionsController@savePurchase');
+Route::get('/edit-transaction/{id}', 'App\Http\Controllers\PurchaseTransactionsController@editPurchase');
+Route::post('/update-transaction/{id}', 'App\Http\Controllers\PurchaseTransactionsController@updatePurchase');
+Route::get('/delete-transaction/{id}', 'App\Http\Controllers\PurchaseTransactionsController@deletePurchase');
+Route::get('/restore-transaction/{id}', 'App\Http\Controllers\PurchaseTransactionsController@restorePurchase');

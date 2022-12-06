@@ -9,7 +9,7 @@
         <li><a href="{{ URL('/show-stores') }}">Stores</a></li>
         <li><a href="{{ URL('/show-categories') }}" class="active">Categories</a></li>
         <li><a href="{{ URL('/show-products') }}">Products</a></li>
-        <li><a href="{{ URL('/show-purchases') }}">Purchase Transactions</a></li>
+        <li><a href="{{ URL('/show-transactions') }}">Purchase Transactions</a></li>
         <li><a href="{{ URL('/logout') }}">Logout</a></li>
         {{-- <li><a href="{{ URL('/prifile') }}">Profile</a></li> --}}
     </ul>
