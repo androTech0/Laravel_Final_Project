@@ -7,8 +7,6 @@
 @section('top-menu')
     <ul class="nav">
         <li><a href="{{ URL('/index') }}" class="active">Intro</a></li>
-        <li><a href="{{ URL('/login') }}">Login</a></li>
-        <li><a href="{{ URL('/signup') }}">Sign up</a></li>
     </ul>
 @endsection
 
@@ -42,7 +40,6 @@
                     </div>
                 </div>
                 <div class="col-lg-5 align-self-center">
-                    <h4>Item name : {{ $product->product_name }}</h4>
                     <span class="author">
                         <img src="{{ $product->store->store_logo }}" alt=""
                             style="max-width: 50px; border-radius: 50%;">
@@ -50,6 +47,9 @@
                             <p style="color:rgb(207, 176, 90);">{{ $product->store->store_name }}</p>
                         </h5>
                     </span>
+                    <p style="font-size: 18px; font-weight:700;"><span
+                            style="font-size: 18px; font-weight:700; color:palevioletred;">Item name :
+                        </span> {{ $product->product_name }}</p>
                     <p style="font-size: 18px; font-weight:700;"><span
                             style="font-size: 18px; font-weight:700; color:palevioletred;">Item description :
                         </span> {{ $product->description }}</p>
@@ -83,12 +83,21 @@
                             <div class="col-lg-4">
                                 <fieldset>
                                     <label for="quantity-text">Quentity :</label>
-                                    <input type="number" min="1" max="20" class="quantity-text" value="1"
-                                        required>
+                                    <input type="number" min="1" max="20" name="quantity"
+                                        class="quantity-text" value="1" required>
                                 </fieldset>
                             </div>
                             <div class="col-lg-5">
                                 <button type="submit" id="form-submit" class="main-button">Bay Now</button>
+                            </div>
+                            <div class="col-lg-4">
+                                @if (@isset($alert1))
+                                    <p style="font-size: 18px; font-weight:700; color:rgb(34, 238, 61);">
+                                        {{ $alert1 }}</p>
+                                @elseif (@isset($alert2))
+                                    <p style="font-size: 18px; font-weight:700; color:rgb(247, 15, 15);">
+                                        {{ $alert1 }}</p>
+                                @endif
                             </div>
                         </div>
                     </form>

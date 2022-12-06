@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/index', 'App\Http\Controllers\UserShowController@index');
 Route::get('/index/search-products', 'App\Http\Controllers\UserShowController@searchProduct');
 Route::get('/index/view-product-details/{id}', 'App\Http\Controllers\UserShowController@viewProductDetails');
+Route::post('/index/save-transaction/{id}', 'App\Http\Controllers\PurchaseTransactionsController@savePurchase');
 
 // login Routes
 Route::get('/login', 'App\Http\Controllers\AdminController@login');

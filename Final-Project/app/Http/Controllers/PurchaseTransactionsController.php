@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\PurchaseTransactionsData;
+use App\Models\ProductData;
 
 class PurchaseTransactionsController extends Controller
 {
@@ -39,27 +40,23 @@ class PurchaseTransactionsController extends Controller
         return view('pages.purchase_transactions_pages.create_purchase_transaction');
     }
 
-    public function savePurchase(Request $request)
+    public function savePurchase(Request $request, $id)
     {
-        if (!Session::get('login')) {
-            return view('pages.login_pages.login')->with('alert', 'you have login first');
+
+        $product = ProductData::where('id', $id)->first();
+
+        for ($x = 1; $x <= $request['quantity']; $x++) {
+            $purchaseTransaction = new PurchaseTransactionsData();
+            $purchaseTransaction->product_id = $product->id;
+            $purchaseTransaction->purchase_price = $product->base_price;
+            $result = $purchaseTransaction->save();
+
+            if ($result == false) {
+                return redirect('/index/view-product-details/' . $id)->with('alert2', 'Failed transaction !!');
+            }
         }
 
-        $purchaseTransaction = new PurchaseTransactionsData();
-        $purchaseTransaction->product_id = $request['product_id'];
-        $purchaseTransaction->purchase_price = $request['purchase_price'];;
-
-        if (
-            $purchaseTransaction->product_id != null
-            && $purchaseTransaction->purchase_price != null
-        ) {
-
-            $purchaseTransaction->save();
-
-            return redirect('/show-purchases');
-        } else {
-            return redirect('/create-purchase')->with('alert', 'Data mistake !!');
-        }
+        return redirect('/index/view-product-details/' . $id)->with('alert1', 'Successful transaction !!');
     }
 
     public function editPurchase($id)
@@ -93,7 +90,7 @@ class PurchaseTransactionsController extends Controller
 
             return redirect('/show-purchases');
         } else {
-            return redirect('/edit-purchase'."/".$id)->with('alert', 'Data mistake !!');
+            return redirect('/edit-purchase' . "/" . $id)->with('alert', 'Data mistake !!');
         }
     }
 

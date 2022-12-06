@@ -215,4 +215,5 @@ class UserShowController extends Controller
         return view('pages.user_pages.view_product_details')
         ->with('product',$product);
     }
+
 }
