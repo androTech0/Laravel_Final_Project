@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <fieldset>
-                                    <label for="username">Gmail</label>
+                                    <label for="username">Username</label>
                                     <input type="text" name="username" id="username" placeholder="Ex. @alansmithee"
                                         autocomplete="on" required>
                                 </fieldset>
