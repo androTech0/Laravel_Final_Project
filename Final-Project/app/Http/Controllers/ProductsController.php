@@ -94,6 +94,7 @@ class ProductsController extends Controller
         $categories = CategoryData::withTrashed()->get();
         $stores = StoreData::withTrashed()->get();
         $productData = ProductData::where('id', $id)
+            ->withTrashed()
             ->first();
 
         return view('pages.product_pages.edit_product')
@@ -108,7 +109,7 @@ class ProductsController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $product = ProductData::where('id', $id)->first();
+        $product = ProductData::where('id', $id)->withTrashed()->first();
 
         $image = $request->file('logo-image');
         if ($image != null) {

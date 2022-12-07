@@ -115,6 +115,7 @@ class PurchaseTransactionsController extends Controller
         }
 
         $purchaseData = PurchaseTransactionsData::where('id', $id)
+            ->withTrashed()
             ->first();
 
         return view('pages.purchase_transactions_pages.edit_purchase_transaction')->with('purchaseData', $purchaseData);
@@ -126,7 +127,7 @@ class PurchaseTransactionsController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $purchaseTransaction = PurchaseTransactionsData::where('id', $id)->first();
+        $purchaseTransaction = PurchaseTransactionsData::where('id', $id)->withTrashed()->first();
         $purchaseTransaction->product_id = $request['product_id'];
         $purchaseTransaction->purchase_price = $request['purchase_price'];;
 

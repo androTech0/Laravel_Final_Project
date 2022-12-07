@@ -78,6 +78,7 @@ class CategoriesController extends Controller
         }
 
         $categoryData = CategoryData::where('id', $id)
+            ->withTrashed()
             ->first();
 
         return view('pages.category_pages.edit_category')->with('categoryData', $categoryData);
@@ -104,14 +105,14 @@ class CategoriesController extends Controller
             if ($status) {
                 $category->category_logo = $fullPath;
             } else {
-                return redirect('/edit-category'."/".$id)->with('alert', 'Data mistake !!');
+                return redirect('/edit-category' . "/" . $id)->with('alert', 'Data mistake !!');
             }
         }
 
         $category->category_name = $request['category_name'];
         $category->category_description = $request['category_description'];
 
-        if($category->category_name != null && $category->category_description != null){
+        if ($category->category_name != null && $category->category_description != null) {
             $category->save();
         }
 

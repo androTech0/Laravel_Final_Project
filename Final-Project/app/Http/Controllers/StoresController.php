@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\StoreData;
 use App\Models\ProductData;
+
 class StoresController extends Controller
 {
     public function showStores()
@@ -76,6 +77,7 @@ class StoresController extends Controller
         }
 
         $storeData = StoreData::where('id', $id)
+            ->withTrashed()
             ->first();
 
         return view('pages.store_pages.edit_store')->with('storeData', $storeData);
@@ -87,7 +89,7 @@ class StoresController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $store = StoreData::where('id', $id)->first();
+        $store = StoreData::where('id', $id)->withTrashed()->first();
 
         $image = $request->file('logo-image');
         if ($image != null) {
