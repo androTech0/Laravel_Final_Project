@@ -47,7 +47,8 @@ Route::get('/delete-product/{id}', 'App\Http\Controllers\ProductsController@dele
 Route::get('/restore-product/{id}', 'App\Http\Controllers\ProductsController@restoreProduct');
 
 // Purchase Routes
-Route::get('/show-transactions', 'App\Http\Controllers\PurchaseTransactionsController@showPurchases');
+Route::get('/show-analysis', 'App\Http\Controllers\PurchaseTransactionsController@showProductAnalysis');
+Route::get('/show-transactions/{id}', 'App\Http\Controllers\PurchaseTransactionsController@showPurchases');
 Route::get('/create-transaction', 'App\Http\Controllers\PurchaseTransactionsController@createPurchase');
 Route::post('/save-transaction', 'App\Http\Controllers\PurchaseTransactionsController@savePurchase');
 Route::get('/edit-transaction/{id}', 'App\Http\Controllers\PurchaseTransactionsController@editPurchase');

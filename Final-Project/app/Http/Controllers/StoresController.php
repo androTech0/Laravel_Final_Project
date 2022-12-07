@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\StoreData;
-
+use App\Models\ProductData;
 class StoresController extends Controller
 {
     public function showStores()
@@ -123,6 +123,7 @@ class StoresController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
+        ProductData::where('store_id', $id)->delete();
         $result = StoreData::where('id', $id)->delete();
 
         return redirect('/show-stores');

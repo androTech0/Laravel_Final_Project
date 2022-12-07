@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\CategoryData;
+use App\Models\ProductData;
+
 class CategoriesController extends Controller
 {
     public function showCategories()
@@ -122,6 +124,7 @@ class CategoriesController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
+        ProductData::where('category_id', $id)->delete();
         $result = CategoryData::where('id', $id)->delete();
 
         return redirect('/show-categories');

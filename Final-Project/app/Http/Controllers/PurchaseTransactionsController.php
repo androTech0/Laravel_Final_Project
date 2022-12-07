@@ -10,13 +10,48 @@ use App\Models\ProductData;
 
 class PurchaseTransactionsController extends Controller
 {
-    public function showPurchases()
+    public function showProductAnalysis()
     {
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $purchases = PurchaseTransactionsData::withTrashed()->get();
+        $products = ProductData::withSum('PurchaseTransactions', 'purchase_price')
+            ->withCount('PurchaseTransactions')
+            ->with('Store')
+            ->withTrashed()
+            ->get();
+
+        $products = $products->map(function ($product) {
+            $product->product_image = Storage::disk('public')->url($product->product_image);
+            if ($product->purchase_transactions_sum_purchase_price > 0) {
+                $product->average = $product->purchase_transactions_sum_purchase_price / $product->purchase_transactions_count;
+            }
+            if($product->average <= 0){
+                $product->average = 0;
+            }
+            if ($product->purchase_transactions_sum_purchase_price == null) {
+                $product->purchase_transactions_sum_purchase_price = 0;
+            }
+            if ($product->purchase_transactions_count == null) {
+                $product->purchase_transactions_count = 0;
+            }
+            return $product;
+        });
+
+        // dd($products->toArray());
+
+        return view('pages.purchase_transactions_pages.analysis_view')
+            ->with('products', $products);
+    }
+
+    public function showPurchases($id)
+    {
+        if (!Session::get('login')) {
+            return view('pages.login_pages.login')->with('alert', 'you have login first');
+        }
+
+        $purchases = PurchaseTransactionsData::where('product_id', $id)->withTrashed()->get();
 
         // dd($store->toArray());
         return view('pages.purchase_transactions_pages.transactions_view')->with('purchases_data', $purchases);
@@ -48,7 +83,12 @@ class PurchaseTransactionsController extends Controller
         for ($x = 1; $x <= $request['quantity']; $x++) {
             $purchaseTransaction = new PurchaseTransactionsData();
             $purchaseTransaction->product_id = $product->id;
-            $purchaseTransaction->purchase_price = $product->base_price;
+            if ($product->active_discount) {
+                $purchaseTransaction->purchase_price = $product->discount_price;
+            } else {
+                $purchaseTransaction->purchase_price = $product->base_price;
+            }
+
             $result = $purchaseTransaction->save();
 
             if ($result == false) {

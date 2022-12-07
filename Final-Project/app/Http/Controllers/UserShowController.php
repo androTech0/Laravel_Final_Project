@@ -17,6 +17,7 @@ class UserShowController extends Controller
         $stores = StoreData::get();
         $products = ProductData::with('Category')->with('Store')->get();
 
+
         $products = $products->map(function ($product) {
             $product->product_image = Storage::disk('public')->url($product->product_image);
             $product->store->store_logo = Storage::disk('public')->url($product->store->store_logo);
@@ -213,7 +214,6 @@ class UserShowController extends Controller
         // dd($product->toArray());
 
         return view('pages.user_pages.view_product_details')
-        ->with('product',$product);
+            ->with('product', $product);
     }
-
 }
