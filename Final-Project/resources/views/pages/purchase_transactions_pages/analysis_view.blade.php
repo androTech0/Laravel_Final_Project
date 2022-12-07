@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col-7">
                                     <div class="main-button">
-                                        <a href="{{ URL('/show-transactions/{id}') }}">Show Transactions</a>
+                                        <a href="{{ URL('/show-transactions/' . $product->id) }}">Show Transactions</a>
                                     </div>
                                 </div>
                             </div>

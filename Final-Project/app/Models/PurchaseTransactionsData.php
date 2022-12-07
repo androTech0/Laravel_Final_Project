@@ -14,6 +14,6 @@ class PurchaseTransactionsData extends Model
     protected $primaryKey = 'id';
     public function Product()
     {
-        return $this->belongsTo('App\Models\ProductData','product_id');
+        return $this->belongsTo('App\Models\ProductData','product_id')->withTrashed();
     }
 }

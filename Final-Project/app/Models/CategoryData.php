@@ -13,6 +13,6 @@ class CategoryData extends Model
     protected $primaryKey = 'id';
     public function Products()
     {
-        return $this->hasMany('App\Models\ProductData','category_id');
+        return $this->hasMany('App\Models\ProductData','category_id')->withTrashed();
     }
 }

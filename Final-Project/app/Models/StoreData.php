@@ -14,6 +14,6 @@ class StoreData extends Model
 
     public function Products()
     {
-        return $this->hasMany('App\Models\ProductData','store_id');
+        return $this->hasMany('App\Models\ProductData','store_id')->withTrashed();
     }
 }

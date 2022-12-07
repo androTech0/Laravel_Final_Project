@@ -16,9 +16,9 @@ class PurchaseTransactionsController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $products = ProductData::withSum('PurchaseTransactions', 'purchase_price')
+        $products = ProductData::with('Store')
+            ->withSum('PurchaseTransactions', 'purchase_price')
             ->withCount('PurchaseTransactions')
-            ->with('Store')
             ->withTrashed()
             ->get();
 
@@ -27,7 +27,7 @@ class PurchaseTransactionsController extends Controller
             if ($product->purchase_transactions_sum_purchase_price > 0) {
                 $product->average = $product->purchase_transactions_sum_purchase_price / $product->purchase_transactions_count;
             }
-            if($product->average <= 0){
+            if ($product->average <= 0) {
                 $product->average = 0;
             }
             if ($product->purchase_transactions_sum_purchase_price == null) {
@@ -51,9 +51,18 @@ class PurchaseTransactionsController extends Controller
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
 
-        $purchases = PurchaseTransactionsData::where('product_id', $id)->withTrashed()->get();
+        $purchases = PurchaseTransactionsData::where('product_id', $id)
+            ->with('Product')
+            ->withTrashed()
+            ->get();
 
-        // dd($store->toArray());
+        $purchases = $purchases->map(function ($purchase) {
+            $purchase->created_at_date = date('y-m-d', strtotime($purchase->created_at));
+            $purchase->created_at_time = date('H:i:s', strtotime($purchase->created_at));
+            return $purchase;
+        });
+
+        // dd($purchases->toArray());
         return view('pages.purchase_transactions_pages.transactions_view')->with('purchases_data', $purchases);
     }
 
