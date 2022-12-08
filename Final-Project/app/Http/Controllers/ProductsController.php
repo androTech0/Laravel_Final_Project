@@ -176,6 +176,7 @@ class ProductsController extends Controller
         $storeData = StoreData::where('id', $id)
             ->with('Products')
             ->with('Products.Category')
+            ->withTrashed()
             ->first();
 
         $storeData->store_logo = Storage::disk('public')->url($storeData->store_logo);
@@ -196,6 +197,7 @@ class ProductsController extends Controller
         $categoryData = CategoryData::where('id', $id)
             ->with('Products')
             ->with('Products.Store')
+            ->withTrashed()
             ->first();
 
         $categoryData->category_logo = Storage::disk('public')->url($categoryData->category_logo);
