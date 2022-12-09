@@ -15,7 +15,7 @@ class CategoriesController extends Controller
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-        
+
         $categories = CategoryData::withCount('Products')->withTrashed()->get();
         $categories = $categories->map(function ($category) {
             $category->category_logo = Storage::disk('public')->url($category->category_logo);
@@ -137,6 +137,7 @@ class CategoriesController extends Controller
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
+        ProductData::onlyTrashed()->where('category_id', $id)->delete();
         $result = CategoryData::onlyTrashed()->where('id', $id)->restore();
         return redirect('/show-categories');
     }

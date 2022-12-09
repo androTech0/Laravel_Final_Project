@@ -133,6 +133,7 @@ class StoresController extends Controller
 
     public function restoreStore($id)
     {
+        ProductData::onlyTrashed()->where('store_id', $id)->delete();
         $result = StoreData::onlyTrashed()->where('id', $id)->restore();
         return redirect('/show-stores');
     }
