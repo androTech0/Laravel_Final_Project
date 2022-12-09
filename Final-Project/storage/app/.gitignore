@@ -1,4 +1,4 @@
 *
 
 !.gitignore
-!/files
+!public/uploads/profile_images/
