@@ -108,26 +108,20 @@ class ProductsController extends Controller
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-
         $product = ProductData::where('id', $id)->withTrashed()->first();
-
         $image = $request->file('logo-image');
         if ($image != null) {
             $path = 'uploads/products-images/';
             $name =  time() + rand(1, 9999999999999) . '.' . $image->getClientOriginalExtension();
             $fullPath = $path . $name;
-
             Storage::disk('public')->put($fullPath, file_get_contents($image));
-
             $status = Storage::disk('public')->exists($fullPath);
-
             if ($status) {
                 $product->product_image = $fullPath;
             } else {
                 return redirect('/edit-product' . "/" . $id)->with('alert', 'Data mistake !!');
             }
         }
-
         $product->product_name = $request['product_name'];
         $product->description = $request['description'];
         $product->store_id = $request['store_id'];
@@ -135,7 +129,6 @@ class ProductsController extends Controller
         $product->base_price = $request['base_price'];
         $product->discount_price = $request['discount_price'];
         $product->active_discount = $request['active_discount'];
-
         if (
             $product->product_name != null
             && $product->description != null
@@ -145,10 +138,10 @@ class ProductsController extends Controller
             && $product->discount_price != null
         ) {
             $product->save();
+            return redirect('/show-products');
+        } else {
+            return redirect('/edit-product' . "/" . $id)->with('alert', 'Data mistake !!');
         }
-
-
-        return redirect('/show-products');
     }
 
     public function deleteProduct($id)

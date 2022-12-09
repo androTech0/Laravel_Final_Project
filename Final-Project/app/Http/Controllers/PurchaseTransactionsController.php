@@ -15,7 +15,6 @@ class PurchaseTransactionsController extends Controller
         if (!Session::get('login')) {
             return view('pages.login_pages.login')->with('alert', 'you have login first');
         }
-
         $products = ProductData::with('Store')
             ->withSum('PurchaseTransactions', 'purchase_price')
             ->withCount('PurchaseTransactions')
@@ -25,7 +24,9 @@ class PurchaseTransactionsController extends Controller
         $products = $products->map(function ($product) {
             $product->product_image = Storage::disk('public')->url($product->product_image);
             if ($product->purchase_transactions_sum_purchase_price > 0) {
-                $product->average = $product->purchase_transactions_sum_purchase_price / $product->purchase_transactions_count;
+                $product->average =
+                    $product->purchase_transactions_sum_purchase_price /
+                    $product->purchase_transactions_count;
             }
             if ($product->average <= 0) {
                 $product->average = 0;
@@ -38,9 +39,6 @@ class PurchaseTransactionsController extends Controller
             }
             return $product;
         });
-
-        // dd($products->toArray());
-
         return view('pages.purchase_transactions_pages.analysis_view')
             ->with('products', $products);
     }
